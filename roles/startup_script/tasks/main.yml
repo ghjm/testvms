@@ -1,0 +1,6 @@
+---
+- name: Copy startup script
+  template:
+    src: "startup.sh"
+    dest: "/root"
+    mode: 0755

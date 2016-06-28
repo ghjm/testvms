@@ -1,0 +1,65 @@
+---
+- name: Ensure VM directory exists
+  file:
+    path: "{{ vm_path }}"
+    state: directory
+  delegate_to: localhost
+
+- name: Check if kickstart ISO file already exists
+  stat:
+    path: "{{ tmp_path }}/{{ inventory_hostname }}/{{ kickstart_iso_filename }}"
+  register: kickstart_iso_file
+  delegate_to: localhost
+
+- name: Create kickstart ISO file
+  include: make_kickstart_iso.yml
+  when: not kickstart_iso_file.stat.exists
+
+- name: Check if VMX file already exists
+  stat:
+    path: "{{ vm_path }}/{{ vmx_filename }}"
+  register: vmx_file
+  delegate_to: localhost
+
+- name: Create VMX file
+  template:
+    src: "el.vmx"
+    dest: "{{ vm_path }}/{{ vmx_filename }}"
+  when: not vmx_file.stat.exists
+  delegate_to: localhost
+
+- name: Create VMDK file
+  command: "\"{{ vmware_library_path }}/vmware-vdiskmanager\" -c -s {{ disk_size }} -t 0 \"{{ vmdk_filename }}\""
+  args:
+    chdir: "{{ vm_path }}"
+  when: vmx_file.stat.exists == False
+  delegate_to: localhost
+
+- name: Boot the VM
+  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} start \"{{ vmx_filename }}\""
+  args:
+    chdir: "{{ vm_path }}"
+  register: result
+  until: result.rc == 0
+  delay: 10
+  retries: 3
+  delegate_to: localhost
+  changed_when: False
+
+- name: Wait for correct IP address to be available via VMware Tools
+  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} getGuestIPAddress \"{{ vmx_filename }}\""
+  args:
+    chdir: "{{ vm_path }}"
+  register: vm_ip_output
+  until: (vm_ip_output.rc == 0) and (vm_ip_output.stdout == ipv4_addr)
+  delay: 15
+  retries: 120
+  delegate_to: localhost
+  changed_when: False
+
+- name: Remove tmp directory
+  file:
+    path: "{{ tmp_path }}/{{ inventory_hostname }}"
+    state: absent
+  delegate_to: localhost
+

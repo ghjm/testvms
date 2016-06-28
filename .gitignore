@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+*.pyc
+Virtual\ Machines/
+downloads
+downloads/
+tmp/
+local_vars.yml
+site.retry

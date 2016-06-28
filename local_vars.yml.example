@@ -1,0 +1,19 @@
+# Local network settings
+ipv4_addr_net_part: "192.168.1"
+ipv4_netmask: "255.255.255.0"
+ipv4_gateway: "192.168.1.1"
+ipv4_nameserver: "192.168.1.1"
+
+# Default root or Administrator password for newly created VMs
+# Example is 'Password1$'
+# To crypt a password: python -c 'import crypt; print crypt.crypt("password"))'
+crypted_password: "$6$gISQyh.uGPh8JW.b$sMVFbJWHqm6hbIByMGlfb0GOO2P6LLqrXjGKqZuhqG3I/Feu1iRlMV0ojN/ZsDJh2ukwTcBZIBhCCLWYVHDLK0"
+
+# Key to add to ssh authorized_keys (replace with your key)
+ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIB7izpeZtPZHYOfaX51rin2Z2AMR/peTOroY3fi+2+CUryA5/ME/Qvpi3U%13lxi0eM4sogI/Ne3HsWuGlhjjH50RUnZngsxNsVUjwFZX+VpH7gVp2COBOPQ1Wpjd8dFF1Zuqwiy+oEItA2seQsauE+BGmkCPGkuRHtERc/ko/Uow=="
+
+# Path for downloaded ISOs
+downloads_path: "~/Downloads/ISOs"
+
+# URL for the startup menu
+menu_url: ""

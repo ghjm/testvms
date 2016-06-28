@@ -1,0 +1,36 @@
+---
+base_path: "{{ playbook_dir }}"
+vms_path: "{{ base_path }}/Virtual\ Machines"
+downloads_path: "{{ base_path }}/downloads"
+extra_rpms_path: "{{ downloads_path }}/extra_rpms"
+tmp_path: "{{ base_path }}/tmp"
+vmware_platform: "Fusion"
+vmware_library_path: "/Applications/VMware Fusion.app/Contents/Library"
+vmware_tools_path: "{{ vmware_library_path }}/isoimages"
+kickstart_ks_filename: "ks.cfg"
+kickstart_iso_filename: "kickstart.iso"
+boot_params: ""
+extra_rpms: []
+
+# Defaults for VMs
+guestos: centos-64
+cpu_count: 1
+memory_size: 1024
+disk_size: 4GB
+vm_name: "{{ inventory_hostname }}"
+vm_path: "{{ vms_path }}/{{ vm_name }}"
+vmx_filename: "{{ vm_name }}.vmx"
+vmdk_filename: "{{ vm_name }}.vmdk"
+snapshot_name: "Snapshot"
+
+# Local network settings
+ipv4_addr_host_part: ""
+ipv4_addr_net_part: ""
+ipv4_netmask: "255.255.255.0"
+ipv4_gateway: ""
+ipv4_nameserver: ""
+ipv4_addr: "{{ ipv4_addr_net_part }}.{{ ipv4_addr_host_part }}"
+
+# Default root or Administrator password for newly created VMs
+crypted_password: "$6$gISQyh.uGPh8JW.b$sMVFbJWHqm6hbIByMGlfb0GOO2P6LLqrXjGKqZuhqG3I/Feu1iRlMV0ojN/ZsDJh2ukwTcBZIBhCCLWYVHDLK0"
+ssh_key: ""

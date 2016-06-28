@@ -1,0 +1,7 @@
+---
+- name: Snapshot the VM
+  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} snapshot \"{{ vmx_filename }}\" \"{{ snapshot_name }}\""
+  args:
+    chdir: "{{ vm_path }}"
+  delegate_to: localhost
+

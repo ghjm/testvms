@@ -1,0 +1,45 @@
+- name: Create tmp directory
+  file:
+    path: "{{ tmp_path }}/{{ inventory_hostname }}"
+    state: directory
+  delegate_to: localhost
+
+- name: Extract isolinux folder from OS CDROM
+  command: "7z x -y \"{{ downloads_path }}/{{ iso_filename }}\" isolinux"
+  args:
+    chdir: "{{ tmp_path }}/{{ inventory_hostname }}"
+  delegate_to: localhost
+
+- name: Copy OS-appropriate Kickstart file to the isolinux folder
+  template:
+    src: "{{ kickstart_ks_filename }}"
+    dest: "{{ tmp_path }}/{{ inventory_hostname }}/isolinux/ks.cfg"
+  delegate_to: localhost
+
+- name: Copy template files to isolinux folder
+  template:
+    src: "{{ item }}"
+    dest: "{{ tmp_path }}/{{ inventory_hostname }}/isolinux/{{ item }}"
+  with_items:
+    - isolinux.cfg
+    - authorized_keys
+  delegate_to: localhost
+
+- name: Create extra RPMs directory
+  file:
+    dest: "{{ tmp_path }}/{{ inventory_hostname }}/isolinux/extras"
+    state: directory
+  delegate_to: localhost
+
+- name: Copy extra RPMs to isolinux folder
+  copy:
+    src: "{{ extra_rpms_path }}/{{ item }}"
+    dest: "{{ tmp_path }}/{{ inventory_hostname }}/isolinux/extras/"
+  with_items: "{{ extra_rpms }}"
+  delegate_to: localhost
+
+- name: Create Kickstart ISO
+  command: "\"{{ vmware_library_path }}/mkisofs\" -o \"{{ kickstart_iso_filename }}\" -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -V -T isolinux"
+  args:
+    chdir: "{{ tmp_path }}/{{ inventory_hostname }}"
+  delegate_to: localhost

@@ -1,0 +1,5 @@
+---
+vmware_guest_os: ""
+iso_filename: ""
+boot_iso_label: ""
+boot_params: ""

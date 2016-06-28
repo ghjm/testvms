@@ -1,0 +1,9 @@
+[test_vms]
+test-centos6 ipv4_addr_host_part=21 os=CentOS-6
+test-centos7 ipv4_addr_host_part=22 os=CentOS-7
+
+[test_vms:vars]
+cpu_count=1
+memory_size=4096
+disk_size=20GB
+
