@@ -6,4 +6,7 @@ test-centos7 ipv4_addr_host_part=22 os=CentOS-7
 cpu_count=1
 memory_size=4096
 disk_size=20GB
-
+ansible_ssh_user=root
+ansible_ssh_host={{ ipv4_addr_net_part }}.{{ ipv4_addr_host_part }}
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_ssh_pipelining=False

@@ -1,6 +1,6 @@
 ---
 vmware_guest_os: 'centos-64'
-iso_filename: 'CentOS-7-x86_64-Minimal-1503-01.iso'
+iso_filename: 'CentOS-7-x86_64-Minimal-1511.iso'
 kickstart_ks_filename: "ks7.cfg"
 boot_params: 'inst.ks=cdrom:/ks.cfg inst.stage2=hd:LABEL=CentOS\x207\x20x86_64'
 extra_rpms:
@@ -8,3 +8,4 @@ extra_rpms:
   - libicu-50.1.2-11.el7.x86_64.rpm
   - libdnet-1.12-13.1.el7.x86_64.rpm
   - open-vm-tools-9.4.0-6.el7.x86_64.rpm
+  - libselinux-python-2.2.2-6.el7.x86_64.rpm

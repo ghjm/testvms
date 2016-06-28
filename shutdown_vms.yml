@@ -7,4 +7,5 @@
   roles:
     - role: vmware_vmrun
       action: shutdown_vm
+      ignore_errors: yes
 

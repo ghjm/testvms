@@ -1,4 +1,7 @@
 ---
+- name: debug
+  debug:
+    msg: "{{ ansible_ssh_host }}"
 - name: Copy startup script
   template:
     src: "startup.sh"

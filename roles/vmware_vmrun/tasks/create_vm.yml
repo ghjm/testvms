@@ -7,7 +7,7 @@
 
 - name: Check if kickstart ISO file already exists
   stat:
-    path: "{{ tmp_path }}/{{ inventory_hostname }}/{{ kickstart_iso_filename }}"
+    path: "{{ vm_path }}/{{ kickstart_iso_filename }}"
   register: kickstart_iso_file
   delegate_to: localhost
 
@@ -56,10 +56,3 @@
   retries: 120
   delegate_to: localhost
   changed_when: False
-
-- name: Remove tmp directory
-  file:
-    path: "{{ tmp_path }}/{{ inventory_hostname }}"
-    state: absent
-  delegate_to: localhost
-

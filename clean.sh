@@ -1,2 +1,3 @@
 #!/bin/bash
-rm -rf tmp 'Virtual Machines' *.retry
+./shutdown_vms.yml
+rm -rf 'Virtual Machines' *.retry
