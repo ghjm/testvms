@@ -4,4 +4,7 @@
   args:
     chdir: "{{ vm_path }}"
   delegate_to: localhost
-
+  register: result
+  failed_when: (result.rc != 0) and ('A snapshot with the name already exists' not in result.stdout)
+  changed_when: (result.rc == 0)
+  serial: 1

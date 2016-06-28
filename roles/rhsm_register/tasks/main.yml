@@ -3,6 +3,7 @@
 - block:
 
     - command: subscription-manager status
+      changed_when: False
 
   rescue:
 
