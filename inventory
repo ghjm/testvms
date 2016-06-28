@@ -1,6 +1,8 @@
 [test_vms]
-test-centos6 ipv4_addr_host_part=21 os=CentOS-6
-test-centos7 ipv4_addr_host_part=22 os=CentOS-7
+#test-centos6 ipv4_addr_host_part=21 os=CentOS-6
+#test-centos7 ipv4_addr_host_part=22 os=CentOS-7
+test-rhel6 ipv4_addr_host_part=23 os=RedHat-6
+test-rhel7 ipv4_addr_host_part=24 os=RedHat-7
 
 [test_vms:vars]
 cpu_count=1

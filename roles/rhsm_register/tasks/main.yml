@@ -1,0 +1,18 @@
+---
+
+- block:
+
+    - command: subscription-manager status
+
+  rescue:
+
+    - include_vars: rhsm_credentials.yml
+    
+    - name: Register RHEL System
+      redhat_subscription:
+        state: present
+        username: "{{ rhsm_username }}"
+        password: "{{ rhsm_password }}"
+        autosubscribe: True
+
+  when: ansible_distribution == 'RedHat'

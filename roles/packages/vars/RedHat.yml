@@ -1,0 +1,7 @@
+---
+yum_packages:
+  - curl
+  - wget
+  - deltarpm
+  - dialog
+  - ntpdate

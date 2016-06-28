@@ -56,3 +56,7 @@
   retries: 120
   delegate_to: localhost
   changed_when: False
+
+- name: Gather facts
+  setup:
+

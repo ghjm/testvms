@@ -2,15 +2,21 @@
 ---
 - hosts: test_vms
   gather_facts: false
+
   pre_tasks:
     - include_vars: local_vars.yml
+
   roles:
     - role: os_specific_vars
 
     - role: vmware_vmrun
       action: create_vm
 
+    - role: rhsm_register
+
+    - role: packages
+
     - role: startup_script
 
-#    - role: vmware_vmrun
-#    action: snapshot_vm
+    - role: vmware_vmrun
+      action: snapshot_vm

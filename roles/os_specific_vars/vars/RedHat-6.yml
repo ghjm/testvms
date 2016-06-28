@@ -1,0 +1,11 @@
+---
+vmware_guest_os: 'rhel6-64'
+iso_filename: 'rhel-server-6.8-x86_64-dvd.iso'
+kickstart_ks_filename: "ks6.cfg"
+boot_params: 'ks=cdrom:/ks.cfg'
+extra_rpms:
+  - libdnet-1.12-6.el6.x86_64.rpm
+  - libicu-4.2.1-14.el6.x86_64.rpm
+  - libmspack-0.5-0.1.alpha.el6.x86_64.rpm
+  - open-vm-tools-9.10.2-3.el6.x86_64.rpm
+  - libselinux-python-2.0.94-7.el6.x86_64.rpm
