@@ -16,5 +16,6 @@
         password: "{{ rhsm_password }}"
         autosubscribe: True
         consumer_id: "{{ rhsm_identities[inventory_hostname] | default(omit) }}"
+      no_log: True
 
   when: ansible_distribution == 'RedHat'

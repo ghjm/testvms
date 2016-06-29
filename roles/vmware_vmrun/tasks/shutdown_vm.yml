@@ -1,6 +1,6 @@
 ---
 - name: Shut down the VM
-  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} stop \"{{ vmx_filename }}\""
+  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} stop \\\"{{ vmx_filename }}\\\"\""
   args:
     chdir: "{{ vm_path }}"
   delegate_to: localhost

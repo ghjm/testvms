@@ -2,7 +2,6 @@
 ---
 - hosts: test_vms
   gather_facts: false
-  strategy: free
 
   pre_tasks:
     - include_vars: local_vars.yml

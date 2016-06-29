@@ -36,7 +36,7 @@
   delegate_to: localhost
 
 - name: Boot the VM
-  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} start \"{{ vmx_filename }}\""
+  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} start \\\"{{ vmx_filename }}\\\"\""
   args:
     chdir: "{{ vm_path }}"
   register: result
@@ -47,7 +47,7 @@
   changed_when: False
 
 - name: Wait for correct IP address to be available via VMware Tools
-  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} getGuestIPAddress \"{{ vmx_filename }}\""
+  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} getGuestIPAddress \\\"{{ vmx_filename }}\\\"\""
   args:
     chdir: "{{ vm_path }}"
   register: vm_ip_output
