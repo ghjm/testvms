@@ -8,12 +8,13 @@
   rescue:
 
     - include_vars: rhsm_credentials.yml
-    
+
     - name: Register RHEL System
       redhat_subscription:
         state: present
         username: "{{ rhsm_username }}"
         password: "{{ rhsm_password }}"
         autosubscribe: True
+        consumer_id: "{{ rhsm_identities[inventory_hostname] | default(omit) }}"
 
   when: ansible_distribution == 'RedHat'
