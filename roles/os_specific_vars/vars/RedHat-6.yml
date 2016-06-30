@@ -1,7 +1,7 @@
 ---
 vmware_guest_os: 'rhel6-64'
 iso_filename: 'rhel-server-6.8-x86_64-dvd.iso'
-unattend_method: "el-ks"n
+unattend_method: "el-ks"
 kickstart_ks_filename: "ks6.cfg"
 boot_params: 'ks=cdrom:/ks.cfg'
 extra_rpms:
