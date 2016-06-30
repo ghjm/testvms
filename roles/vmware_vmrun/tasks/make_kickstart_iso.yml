@@ -16,12 +16,18 @@
     dest: "{{ vm_path }}/isolinux/ks.cfg"
   delegate_to: localhost
 
-- name: Copy template files to isolinux folder
+- name: Copy isolinux.cfg to the isolinux folder
+  template:
+    src: isolinux-el.cfg
+    dest: "{{ vm_path }}/isolinux/isolinux.cfg"
+    force: yes
+  delegate_to: localhost
+
+- name: Copy other template files to isolinux folder
   template:
     src: "{{ item }}"
     dest: "{{ vm_path }}/isolinux/{{ item }}"
   with_items:
-    - isolinux.cfg
     - authorized_keys
   delegate_to: localhost
 

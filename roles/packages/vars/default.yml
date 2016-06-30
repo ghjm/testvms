@@ -1,3 +1,4 @@
 ---
 yum_packages: []
+apt_repos: []
 apt_packages: []

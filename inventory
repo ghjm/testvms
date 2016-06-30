@@ -5,6 +5,7 @@ test-rhel6 ipv4_addr_host_part=23 os=RedHat-6
 test-rhel7 ipv4_addr_host_part=24 os=RedHat-7
 test-ol6 ipv4_addr_host_part=25 os=OL-6
 test-ol7 ipv4_addr_host_part=26 os=OL-7
+test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
 
 [test_vms:vars]
 cpu_count=1

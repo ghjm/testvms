@@ -1,0 +1,87 @@
+- name: Create tmp directory
+  file:
+    path: "{{ vm_path }}"
+    state: directory
+  delegate_to: localhost
+
+- name: Extract isolinux folder from OS CDROM
+  command: "7z x -y \"{{ downloads_path }}/{{ iso_filename }}\" isolinux"
+  args:
+    chdir: "{{ vm_path }}"
+  delegate_to: localhost
+
+- name: Extract install folder from OS CDROM
+  command: "7z x -y \"{{ downloads_path }}/{{ iso_filename }}\" install"
+  args:
+    chdir: "{{ vm_path }}/isolinux"
+  delegate_to: localhost
+
+- name: Copy isolinux.cfg to the isolinux folder
+  template:
+    src: isolinux-ubuntu.cfg
+    dest: "{{ vm_path }}/isolinux/isolinux.cfg"
+    force: yes
+  delegate_to: localhost
+
+- name: Copy other template files to isolinux folder
+  template:
+    src: "{{ item }}"
+    dest: "{{ vm_path }}/isolinux/{{ item }}"
+  with_items:
+    - authorized_keys
+  delegate_to: localhost
+
+- name: Create initrd temp folder
+  file:
+    path: "{{ vm_path }}/isolinux/install/initrd-tmp"
+    state: directory
+  delegate_to: localhost
+    
+- name: Extract initrd to temp folder
+  shell: "gzip -d < ../initrd.gz | cpio -id"
+  args:
+    chdir: "{{ vm_path }}/isolinux/install/initrd-tmp"
+  delegate_to: localhost
+
+- name: Template preseed file to initrd temp folder
+  template:
+    src: preseed.cfg
+    dest: "{{ vm_path }}/isolinux/install/initrd-tmp/preseed.cfg"
+  delegate_to: localhost
+
+- name: Rebuild initrd
+  shell: "find . | cpio --create --format='newc' | gzip > ../initrd.gz"
+  args:
+    chdir: "{{ vm_path }}/isolinux/install/initrd-tmp"
+  delegate_to: localhost
+
+- name: Remove initrd temp folder
+  file:
+    path: "{{ vm_path }}/isolinux/install/initrd-tmp"
+    state: absent
+  delegate_to: localhost
+
+#- name: Create extra RPMs directory
+#  file:
+#    dest: "{{ vm_path }}/isolinux/extras"
+#    state: directory
+#  delegate_to: localhost
+
+#- name: Copy extra RPMs to isolinux folder
+#  copy:
+#    src: "{{ extra_rpms_path }}/{{ item }}"
+#    dest: "{{ vm_path }}/isolinux/extras/"
+#  with_items: "{{ extra_rpms }}"
+#  delegate_to: localhost
+
+- name: Create Kickstart ISO
+  command: "\"{{ vmware_library_path }}/mkisofs\" -o \"{{ kickstart_iso_filename }}\" -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -V -T isolinux"
+  args:
+    chdir: "{{ vm_path }}"
+  delegate_to: localhost
+
+- name: Remove temp files
+  file:
+    path: "{{ vm_path }}/isolinux"
+    state: absent
+  delegate_to: localhost

@@ -13,7 +13,11 @@
 
 - name: Create kickstart ISO file
   include: make_kickstart_iso.yml
-  when: not kickstart_iso_file.stat.exists
+  when: not kickstart_iso_file.stat.exists and unattend_method == "el-ks"
+
+- name: Create preseed ISO file
+  include: make_preseed_iso.yml
+  when: not kickstart_iso_file.stat.exists and unattend_method == "ubuntu"
 
 - name: Check if VMX file already exists
   stat:
@@ -23,7 +27,7 @@
 
 - name: Create VMX file
   template:
-    src: "el.vmx"
+    src: "vm.vmx"
     dest: "{{ vm_path }}/{{ vmx_filename }}"
   when: not vmx_file.stat.exists
   delegate_to: localhost

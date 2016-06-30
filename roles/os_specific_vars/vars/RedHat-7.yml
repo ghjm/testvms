@@ -1,6 +1,7 @@
 ---
 vmware_guest_os: 'rhel7-64'
 iso_filename: 'rhel-server-7.2-x86_64-dvd.iso'
+unattend_method: "el-ks"
 kickstart_ks_filename: "ks7.cfg"
 boot_params: 'inst.ks=cdrom:/ks.cfg inst.stage2=hd:LABEL=RHEL-7.2\x20Server.x86_64'
 extra_rpms:

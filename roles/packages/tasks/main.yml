@@ -11,11 +11,32 @@
         - 'default.yml'
       paths: '../vars'
 
+- block:
+
+    - name: Update apt cache
+      apt:
+        update_cache: True
+
+  rescue:
+
+    - name: Clear stale cache
+      file:
+        path: /var/lib/apt/lists
+        state: absent
+
+    - name: Update apt cache via command
+      command: "apt-get update"
+
 - name: Install packages via yum
   yum:
     name: '{{ item }}'
     state: installed
   with_items: "{{ yum_packages }}"
+
+- name: Install additional apt repositories
+  apt_repository:
+    repo: "{{ item }}"
+  with_items: "{{ apt_repos }}"
 
 - name: Install packages via apt-get
   apt:

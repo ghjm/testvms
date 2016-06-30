@@ -1,6 +1,7 @@
 ---
 vmware_guest_os: 'centos-64'
 iso_filename: 'Oracle-Linux-6.8-x86_64.iso'
+unattend_method: "el-ks"
 kickstart_ks_filename: "ks6.cfg"
 boot_params: 'ks=cdrom:/ks.cfg'
 extra_rpms:
