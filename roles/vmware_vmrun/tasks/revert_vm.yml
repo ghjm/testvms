@@ -1,5 +1,5 @@
 ---
-- name: Snapshot the VM
+- name: Revert the VM to snapshot
   command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} revertToSnapshot \\\"{{ vmx_filename }}\\\" \\\"{{ snapshot_name }}\\\"\""
   args:
     chdir: "{{ vm_path }}"
