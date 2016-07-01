@@ -1,0 +1,6 @@
+---
+- name: Remove VM snapshot
+  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} deleteSnapshot \\\"{{ vmx_filename }}\\\" \\\"{{ snapshot_name }}\\\"\""
+  args:
+    chdir: "{{ vm_path }}"
+  delegate_to: localhost
