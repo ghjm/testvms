@@ -1,0 +1,4 @@
+---
+vmware_guest_os: 'ubuntu-64'
+iso_filename: 'ubuntu-16.04-server-amd64.iso'
+unattend_method: "ubuntu"
