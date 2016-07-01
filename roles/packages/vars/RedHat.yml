@@ -1,7 +1,8 @@
 ---
-yum_packages:
+packages:
   - curl
   - wget
   - deltarpm
   - dialog
   - ntpdate
+  - yum-utils

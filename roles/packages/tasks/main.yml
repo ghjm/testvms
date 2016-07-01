@@ -11,36 +11,48 @@
         - 'default.yml'
       paths: '../vars'
 
-- block:
+# RPM-based package installation
 
-    - name: Update apt cache
-      apt:
-        update_cache: True
-
-  rescue:
-
-    - name: Clear stale cache
-      file:
-        path: /var/lib/apt/lists
-        state: absent
-
-    - name: Update apt cache via command
-      command: "apt-get update"
+- name: Install additional yum repositories
+  yum_repository:
+    name: '{{ item.name }}'
+    baseurl: '{{ item.baseurl|default(omit) }}'
+    mirrorlist: '{{ item.mirrorlist|default(omit) }}'
+  with_items: '{{ repos }}'
+  when: ansible_os_family == 'RedHat'
 
 - name: Install packages via yum
   yum:
     name: '{{ item }}'
     state: installed
-  with_items: "{{ yum_packages }}"
+  with_items: "{{ packages }}"
+  when: ansible_os_family == 'RedHat'
+
+# Apt-based package installation
+
+- block:
+    - name: Update apt cache
+      apt:
+        update_cache: True
+  rescue:
+    - name: Clear stale cache
+      file:
+        path: /var/lib/apt/lists
+        state: absent
+    - name: Update apt cache via command
+      command: "apt-get update"
+  when: ansible_os_family == 'Debian'
 
 - name: Install additional apt repositories
   apt_repository:
-    repo: "{{ item }}"
-  with_items: "{{ apt_repos }}"
+    repo: "{{ item.repo }}"
+  with_items: "{{ repos }}"
+  when: ansible_os_family == 'Debian'
 
 - name: Install packages via apt-get
   apt:
     name: '{{ item }}'
     state: installed
-  with_items: "{{ apt_packages }}"
+  with_items: "{{ packages }}"
+  when: ansible_os_family == 'Debian'
 

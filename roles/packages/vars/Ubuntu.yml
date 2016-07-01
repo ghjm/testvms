@@ -1,6 +1,6 @@
 ---
-apt-repos:
-  - ppa:ansible/ansible
+repos:
+  - repo: ppa:ansible/ansible
 
-apt_packages:
+packages:
   - dialog
