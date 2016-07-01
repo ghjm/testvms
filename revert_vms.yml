@@ -1,0 +1,11 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: test_vms
+  gather_facts: false
+  pre_tasks:
+    - include_vars: local_vars.yml
+  roles:
+    - role: vmware_vmrun
+      action: revert_vm
+      ignore_errors: yes
+
