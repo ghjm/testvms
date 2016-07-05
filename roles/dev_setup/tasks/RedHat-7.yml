@@ -5,23 +5,32 @@
 - name: Install dev packages
   yum:
     name: "{{ item }}"
-	state: present
+    state: present
   with_items:
     - "@GNOME Desktop"
-	- "@Development Tools"
-	
+    - "@Development Tools"
+
 - name: Remove unwanted packages from groups
   yum:
     name: "{{ item }}"
-	state: absent
+    state: absent
   with_items:
     - "PackageKit"
 
 - name: Set graphical environment as default
   command: "systemctl set-default graphical.target"
-  
+
 - name: Reboot the system
-  command: /sbin/reboot
+  command: "/sbin/shutdown -r +1"
+  async: 0
+  poll: 0
+  ignore_errors: True
 
 - name: Wait for the system to finish rebooting
-  local_action: wait_for host="{{ ansible_ssh_host }}" search_regex=OpenSSH port=22 timeout=300
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    search_regex: OpenSSH
+    port: 22
+    timeout: 300
+  delegate_to: localhost
+ 

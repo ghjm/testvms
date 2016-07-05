@@ -1,5 +1,5 @@
 ---
-- include: '{{ item }}.yml'
+- include: '{{ include_item }}'
   with_first_found:
     - files:
         - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'           # CentOS-6.5
@@ -9,6 +9,8 @@
         - '{{ ansible_distribution }}.yml'                                              # CentOS
         - '{{ ansible_os_family }}.yml'                                                 # RedHat
         - 'default.yml'
+  loop_control:
+    loop_var: include_item
 
 # To Do:
 

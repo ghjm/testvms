@@ -5,18 +5,27 @@
 - name: Install dev packages
   apt:
     name: "{{ item }}"
-	state: present
-	install_recommends: no
+    state: present
+    install_recommends: no
   with_items:
     - "ubuntu-desktop"
-	- "ubuntu-standard"
-	- "open-vm-tools-desktop"
-	
+    - "ubuntu-standard"
+    - "open-vm-tools-desktop"
+
 - name: Set locale
   command: "localectl set-locale LANG=\"en_US.UTF-8\""
 
 - name: Reboot the system
-  command: /sbin/reboot
+  command: "/sbin/shutdown -r +1"
+  async: 0
+  poll: 0
+  ignore_errors: True
 
 - name: Wait for the system to finish rebooting
-  local_action: wait_for host="{{ ansible_ssh_host }}" search_regex=OpenSSH port=22 timeout=300
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    search_regex: OpenSSH
+    port: 22
+    timeout: 300
+  delegate_to: localhost
+
