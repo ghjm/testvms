@@ -1,6 +1,6 @@
 #!/usr/bin/env ansible-playbook
 ---
-- hosts: test_vms
+- hosts: all_vms
   gather_facts: false
 
   pre_tasks:
@@ -18,5 +18,6 @@
 
     - role: startup_script
 
-    - role: vmware_vmrun
-      action: snapshot_vm
+- hosts: dev_vms
+  roles:
+    - role: dev_setup

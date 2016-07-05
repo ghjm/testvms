@@ -1,0 +1,24 @@
+---
+- include: '{{ item }}.yml'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'           # CentOS-6.5
+        - '{{ ansible_os_family }}-{{ ansible_distribution_version }}.yml'              # RedHat-6.5
+        - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'     # CentOS-6
+        - '{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml'        # RedHat-6
+        - '{{ ansible_distribution }}.yml'                                              # CentOS
+        - '{{ ansible_os_family }}.yml'                                                 # RedHat
+        - 'default.yml'
+
+# To Do:
+
+
+# create local user   (full name?)
+# git global username/email
+# sudo nopasswd
+# git-prompt
+# vimrc
+# Remove mounted ISOs
+# More packages (python-virtualenv, etc)
+
+

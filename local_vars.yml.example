@@ -9,8 +9,47 @@ ipv4_nameserver: "192.168.1.1"
 # To crypt a password: python -c 'import crypt; print crypt.crypt("password"))'
 crypted_password: "$6$gISQyh.uGPh8JW.b$sMVFbJWHqm6hbIByMGlfb0GOO2P6LLqrXjGKqZuhqG3I/Feu1iRlMV0ojN/ZsDJh2ukwTcBZIBhCCLWYVHDLK0"
 
+# User to create on dev boxes
+dev_user: dev-user
+dev_password: "{{ crypted_password }}"
+
 # Key to add to ssh authorized_keys (replace with your key)
-ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIB7izpeZtPZHYOfaX51rin2Z2AMR/peTOroY3fi+2+CUryA5/ME/Qvpi3U%13lxi0eM4sogI/Ne3HsWuGlhjjH50RUnZngsxNsVUjwFZX+VpH7gVp2COBOPQ1Wpjd8dFF1Zuqwiy+oEItA2seQsauE+BGmkCPGkuRHtERc/ko/Uow=="
+ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGOg4GE2GnCPntAiEwKYdNvSX2XG/hgh35tonjf0E5Z90VZ92xOng6xDBlp7I41LCL4ZGWzEjPZ0C2BtZs8G6YmFgCM88Gm+r2h9ZvFnqx/DexppbD0l8FylOBBfI4PYeKokb9Uh6t8xZEP6w30SanspdqrHVC+tkuKGP5d8uS0cUr2QYjqQwYKsUIx/EFu6+wBdBSNlLsQvHmzr4ojRwI2oR8byfXhxH0BMyvj9BkW4BRAq1Xo1SDFd/9JZFe3iOT7+XV6dZyq05L5iv3LVdDE/z3BsauPfw/Fh26nUx2QsM3OCXsXCEqjL1TFe5uwikR20SrGD0C+mQm3ciE2O+L"
+
+# Encrypted private key to install on dev boxes
+ssh_private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  Proc-Type: 4,ENCRYPTED
+  DEK-Info: AES-128-CBC,8F4890E963694CDD9E2DF24272737FE1
+  
+  2ivYrVAB0Nqte90P9tXAcPthMG1VI4UXc4BuVrQhlORvS99mv15MFqA3P1JIAs8b
+  FyU8HGXxRk21kXirol5lI/5Pp7Yf0VqPNA3DBDjx9K0jp98DFIoCRP3HlKmsaO9z
+  zd+q0qPUnJFTemorEDJD6WRMANWXWQOlCIW7k4rTtNacFYQ+6bm6msHoJZ8yfc9Y
+  xAL1IGj0qIOzfRg2s1hMmc5oU0intot7UNBlqOy8DURPeya6pWBLMcxrHzpQgFAw
+  XIw1fKv1CD0ZGbvfD2Tk4Rj1s6lJXdtU2FU8CU3pneWgTkOCNV0wLwTJTh3tBTIf
+  +bxQvuH4uGO8BmYvUYMBrlE7KhYlhEPCd700HnL0SbALe+RFr752vFkF5YYxwt/d
+  YRLeYkGTMUIVXF+B7WjZld69aRBbBpUIupMwfJjba9B4w4r48jNMZrWIrbfzo4IS
+  2FhoJXw0R99yLdlunJQD16jclsMrH7xmvXobh4BMMgyvIB/+VhCqG96wJtRTLbJY
+  chnKMm1mfYrrll7zpsAsqkKfGaMvfP1MYHQV8q9wZnI8fa0MrUYDB/zDwgs/651+
+  9YvBkPUeT+r9mJwxRz5LTVq9VtIpx/QW1Oy5cY0T1JjGkQaxxlMveonZiRx3hIVR
+  v/WnG2ik3uPRGUawsfZ6LAPAbguacPixU3ME/UhQTHjszGutjItnoGW9il7hKYWd
+  VDEDQKXiUICu2lzVo8xg3nmg4zDBRESLmKjmG+tTJjsfG1drHZse1gwEy410iNVH
+  YaMSSd9eexXAsPyBTCD00aEOI++Bn5qFq60JFj4MNGLYIi2sokySYuMofatSHpGo
+  n8NJzqVoVCap2C20WiY/CfOlE0dLgwz/fjP2BR6Zqa056HdW6EBGhUN97MiY49RQ
+  4SP/hRaD4KnHDJOgtX7krwRTaDbfD2V9uftjGa2Eb5QV7IlOqJSQ6koE/7uBEM2C
+  4sVEOn2so2WdmplPHRdy5UvUaUJZoNTluB0zmvYcJVGozo488dI4CrDyIKHRqSh8
+  JyMDPEy7tlSuDLgAsgZhIID0q8Oy+UortAu6G69hTdhAE2kI7GZJr2nzk4fOM+3+
+  ReTqS71JdyLUUvyLWwHpyVVxmlg/NorS5EjDHIUai1FDjVOWM1pMTwfkcN1Hyg8q
+  zqLf/GQMGcofzMLrAyDeY3gKRJRl2tBQbfBsrVrb2QFkBI/H2N8Z/B4dg02XqdO2
+  t5/s5OwrwKslHkjBxYc5prQnPYhA7pF2oanKi+rdc9U8kmj8NLLVhpU6Pp/RJU8B
+  l31N9lt3w8RhyyZnPGYVR0coabe8Spml4ZoCy8Rjfl5Ga2XXAn+snT6nFTKPpgGx
+  Qcd/sDFSBNI4YNfIlRmEQ+o1KUAThWicQRRR90l9blDCVnSIo5gHXPLh8bbYE+Z2
+  CHgFpfIo7NnPtGARR0OK9s47ruzFaQLEN6lkZrPcVPID+13dhmv5JyR3uah8SXSJ
+  5uFUaw4rPYD7krM1WHgYI0Gyrdy3B4P4gibWMH5Gu3hA1Ds8hMa7nOwIBRO4KtG9
+  GUAidz7/FdJcjSFKFiR+Gen2e2Ib5gc9FyHrmZlKy3XX821mGGxe8diG5nVqcclJ
+  -----END RSA PRIVATE KEY-----
+
+
 
 # Path for downloaded ISOs
 downloads_path: "~/Downloads/ISOs"
