@@ -1,0 +1,5 @@
+---
+vmware_guest_os: 'windows8srv-64'
+vmx_template: "windows.vmx"
+iso_filename: '9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.iso'
+unattend_method: "windows"

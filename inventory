@@ -8,6 +8,7 @@ test-ol7 ipv4_addr_host_part=26 os=OL-7
 test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
 test-ubuntu14 ipv4_addr_host_part=28 os=Ubuntu-14
 test-ubuntu16 ipv4_addr_host_part=29 os=Ubuntu-16
+test-win2012 ipv4_addr_host_part=30 os=Windows-2012-R2 ansible_connection=winrm ansible_port=5986
 
 [dev_vms]
 dev-centos7 ipv4_addr_host_part=10 os=CentOS-7
@@ -21,6 +22,3 @@ dev_vms
 cpu_count=1
 memory_size=4096
 disk_size=20GB
-ansible_ssh_user=root
-ansible_ssh_host={{ ipv4_addr_net_part }}.{{ ipv4_addr_host_part }}
-ansible_ssh_common_args='-o StrictHostKeyChecking=no'

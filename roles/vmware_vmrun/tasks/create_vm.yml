@@ -19,6 +19,10 @@
   include: make_preseed_iso.yml
   when: not kickstart_iso_file.stat.exists and unattend_method == "ubuntu"
 
+- name: Create unattend ISO file
+  include: make_unattend_iso.yml
+  when: not kickstart_iso_file.stat.exists and unattend_method == "windows"
+
 - name: Check if VMX file already exists
   stat:
     path: "{{ vm_path }}/{{ vmx_filename }}"
@@ -27,7 +31,7 @@
 
 - name: Create VMX file
   template:
-    src: "vm.vmx"
+    src: "{{ vmx_template }}"
     dest: "{{ vm_path }}/{{ vmx_filename }}"
   when: not vmx_file.stat.exists
   delegate_to: localhost
@@ -55,7 +59,7 @@
   args:
     chdir: "{{ vm_path }}"
   register: vm_ip_output
-  until: (vm_ip_output.rc == 0) and (vm_ip_output.stdout == ipv4_addr)
+  until: (vm_ip_output.rc == 0) and (vm_ip_output.stdout == ansible_ssh_host)
   delay: 15
   retries: 120
   delegate_to: localhost

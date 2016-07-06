@@ -23,14 +23,3 @@ vmx_filename: "{{ vm_name }}.vmx"
 vmdk_filename: "{{ vm_name }}.vmdk"
 snapshot_name: "Snapshot"
 
-# Local network settings
-ipv4_addr_host_part: ""
-ipv4_addr_net_part: ""
-ipv4_netmask: "255.255.255.0"
-ipv4_gateway: ""
-ipv4_nameserver: ""
-ipv4_addr: "{{ ipv4_addr_net_part }}.{{ ipv4_addr_host_part }}"
-
-# Default root or Administrator password for newly created VMs
-crypted_password: "$6$gISQyh.uGPh8JW.b$sMVFbJWHqm6hbIByMGlfb0GOO2P6LLqrXjGKqZuhqG3I/Feu1iRlMV0ojN/ZsDJh2ukwTcBZIBhCCLWYVHDLK0"
-ssh_key: ""
