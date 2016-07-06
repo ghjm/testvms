@@ -1,5 +1,6 @@
 ---
 vmware_guest_os: 'rhel6-64'
+vmx_template: "linux.vmx"
 iso_filename: 'rhel-server-6.8-x86_64-dvd.iso'
 unattend_method: "el-ks"
 kickstart_ks_filename: "ks6.cfg"

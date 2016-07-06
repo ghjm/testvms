@@ -1,0 +1,33 @@
+---
+
+# RHEL/CentOS 7 Dev Box Setup
+
+- name: Install dev packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "@^GNOME Desktop"
+    - "@Development Tools"
+    - "openssh-askpass"
+
+- name: Remove packages we don't want that came in through groups
+  yum:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "PackageKit"
+    - "gnome-initial-setup"
+    - "libvirt-daemon"
+
+- name: Check if graphical environment is the default
+  command: "systemctl get-default"
+  register: systemctl_default
+  changed_when: False
+
+- name: Set graphical environment as default
+  command: "systemctl set-default graphical.target"
+  when: '"graphical.target" not in systemctl_default.stdout'
+  notify:
+    - reboot
+

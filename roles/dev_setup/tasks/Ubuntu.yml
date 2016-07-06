@@ -6,26 +6,20 @@
   apt:
     name: "{{ item }}"
     state: present
-    install_recommends: no
   with_items:
-    - "ubuntu-desktop"
     - "ubuntu-standard"
+    - "ubuntu-desktop"
+    - "xserver-xorg-input-all"
     - "open-vm-tools-desktop"
+
+- name: Check locale
+  command: "localectl"
+  register: localectl_result
+  changed_when: False
 
 - name: Set locale
   command: "localectl set-locale LANG=\"en_US.UTF-8\""
-
-- name: Reboot the system
-  command: "/sbin/shutdown -r +1"
-  async: 0
-  poll: 0
-  ignore_errors: True
-
-- name: Wait for the system to finish rebooting
-  wait_for:
-    host: "{{ ansible_ssh_host }}"
-    search_regex: OpenSSH
-    port: 22
-    timeout: 300
-  delegate_to: localhost
+  when: '"System Locale: LANG=en_US.UTF-8" not in localectl_result.stdout'
+  notify:
+    - reboot
 

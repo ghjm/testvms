@@ -1,0 +1,6 @@
+---
+- name: reboot
+  shell: "nohup sh -c 'sleep 5 && /sbin/reboot' > /dev/null &"
+  async: 0
+  poll: 0
+  ignore_errors: True

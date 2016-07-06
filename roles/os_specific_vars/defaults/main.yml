@@ -1,5 +1,6 @@
 ---
 vmware_guest_os: ""
+vmx_template: ""
 iso_filename: ""
 boot_iso_label: ""
 boot_params: ""

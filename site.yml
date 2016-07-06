@@ -3,6 +3,7 @@
 - hosts: all_vms
   gather_facts: false
   serial: "{{ serial|default(omit) }}"
+  strategy: free
 
   pre_tasks:
     - include_vars: local_vars.yml
@@ -15,10 +16,15 @@
 
     - role: rhsm_register
 
-    - role: packages
+    - role: basic_packages
 
+- hosts: test_vms
+  roles:
     - role: startup_script
+  strategy: free
 
 - hosts: dev_vms
   roles:
     - role: dev_setup
+  strategy: free
+

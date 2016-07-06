@@ -1,23 +1,56 @@
 ---
-- include: '{{ include_item }}'
-  with_first_found:
-    - files:
-        - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'           # CentOS-6.5
-        - '{{ ansible_os_family }}-{{ ansible_distribution_version }}.yml'              # RedHat-6.5
-        - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'     # CentOS-6
-        - '{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml'        # RedHat-6
-        - '{{ ansible_distribution }}.yml'                                              # CentOS
-        - '{{ ansible_os_family }}.yml'                                                 # RedHat
-        - 'default.yml'
-  loop_control:
-    loop_var: include_item
+
+- include: 'CentOS-7.yml'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- include: 'Ubuntu.yml'
+  when: ansible_distribution == 'Ubuntu'
+
+- name: 'Create dev user'
+  user:
+    name: "{{ dev_user }}"
+    password: "{{ dev_password }}"
+    comment: "{{ dev_user_full_name }}"
+    update_password: on_create
+
+- name: 'Create user ssh folder'
+  file:
+    path: "/home/{{ dev_user }}/.ssh"
+    state: directory
+    mode: 0700
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    setype: "ssh_home_t"
+
+- name: 'Configure ssh public key'
+  copy:
+    content: "{{ ssh_key }}"
+    dest: "/home/{{ dev_user }}/.ssh/id_rsa.pub"
+    mode: 0700
+    force: no
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    setype: "ssh_home_t"
+
+- name: 'Configure ssh private key'
+  copy:
+    content: "{{ ssh_private_key }}"
+    dest: "/home/{{ dev_user }}/.ssh/id_rsa"
+    mode: 0700
+    force: no
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    setype: "ssh_home_t"
+
+- name: 'Configure sudoers'
+  lineinfile:
+    dest: "/etc/sudoers"
+    state: present
+    regexp: "^{{ dev_user }}"
+    line: "{{ dev_user }} ALL=(ALL) NOPASSWD: ALL"
 
 # To Do:
-
-
-# create local user   (full name?)
 # git global username/email
-# sudo nopasswd
 # git-prompt
 # vimrc
 # Remove mounted ISOs

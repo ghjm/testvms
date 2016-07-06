@@ -4,6 +4,11 @@ ipv4_netmask: "255.255.255.0"
 ipv4_gateway: "192.168.1.1"
 ipv4_nameserver: "192.168.1.1"
 
+# Local ssh settings
+ansible_ssh_user: root
+ansible_ssh_host: "{{ ipv4_addr_net_part }}.{{ ipv4_addr_host_part }}"
+#ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
 # Default root or Administrator password for newly created VMs
 # Example is 'Password1$'
 # To crypt a password: python -c 'import crypt; print crypt.crypt("password"))'
@@ -12,6 +17,8 @@ crypted_password: "$6$gISQyh.uGPh8JW.b$sMVFbJWHqm6hbIByMGlfb0GOO2P6LLqrXjGKqZuhq
 # User to create on dev boxes
 dev_user: dev-user
 dev_password: "{{ crypted_password }}"
+dev_user_full_name: "Dev User"
+dev_user_email: "devuser@example.com"
 
 # Key to add to ssh authorized_keys (replace with your key)
 ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGOg4GE2GnCPntAiEwKYdNvSX2XG/hgh35tonjf0E5Z90VZ92xOng6xDBlp7I41LCL4ZGWzEjPZ0C2BtZs8G6YmFgCM88Gm+r2h9ZvFnqx/DexppbD0l8FylOBBfI4PYeKokb9Uh6t8xZEP6w30SanspdqrHVC+tkuKGP5d8uS0cUr2QYjqQwYKsUIx/EFu6+wBdBSNlLsQvHmzr4ojRwI2oR8byfXhxH0BMyvj9BkW4BRAq1Xo1SDFd/9JZFe3iOT7+XV6dZyq05L5iv3LVdDE/z3BsauPfw/Fh26nUx2QsM3OCXsXCEqjL1TFe5uwikR20SrGD0C+mQm3ciE2O+L"
