@@ -92,7 +92,7 @@
                 <RunSynchronousCommand wcm:action="add">
                     <Description>VMWare Tools</Description>
                     <Order>3</Order>
-                    <Path>F:\setup64.exe /s /v &quot;/qn REBOOT=ReallySuppress&quot; /l C:\Windows\Temp\vmware_tools_install.log</Path>
+                    <Path>E:\vmware-tools-setup64.exe /s /v &quot;/qn REBOOT=ReallySuppress&quot; /l C:\Windows\Temp\vmware_tools_install.log</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>

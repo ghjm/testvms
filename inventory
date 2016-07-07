@@ -8,7 +8,7 @@ test-ol7 ipv4_addr_host_part=26 os=OL-7
 test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
 test-ubuntu14 ipv4_addr_host_part=28 os=Ubuntu-14
 test-ubuntu16 ipv4_addr_host_part=29 os=Ubuntu-16
-test-win2012 ipv4_addr_host_part=30 os=Windows-2012-R2 ansible_connection=winrm ansible_port=5986
+test-win2012 ipv4_addr_host_part=30 os=Windows-2012-R2 ansible_connection=winrm ansible_port=5986 ansible_ssh_user=Administrator ansible_ssh_pass=Password1$
 
 [dev_vms]
 dev-centos7 ipv4_addr_host_part=10 os=CentOS-7

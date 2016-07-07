@@ -5,6 +5,7 @@ iso_filename: 'rhel-server-7.2-x86_64-dvd.iso'
 unattend_method: "el-ks"
 kickstart_ks_filename: "ks7.cfg"
 boot_params: 'inst.ks=cdrom:/ks.cfg inst.stage2=hd:LABEL=RHEL-7.2\x20Server.x86_64'
+ansible_ssh_user: root
 extra_rpms:
   - net-tools-2.0-0.17.20131004git.el7.x86_64.rpm
   - libicu-50.1.2-11.el7.x86_64.rpm

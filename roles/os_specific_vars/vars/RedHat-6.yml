@@ -5,6 +5,7 @@ iso_filename: 'rhel-server-6.8-x86_64-dvd.iso'
 unattend_method: "el-ks"
 kickstart_ks_filename: "ks6.cfg"
 boot_params: 'ks=cdrom:/ks.cfg'
+ansible_ssh_user: root
 extra_rpms:
   - libdnet-1.12-6.el6.x86_64.rpm
   - libicu-4.2.1-14.el6.x86_64.rpm
