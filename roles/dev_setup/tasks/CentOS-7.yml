@@ -18,7 +18,11 @@
   with_items:
     - "PackageKit"
     - "gnome-initial-setup"
+    - "initial-setup-gui"
+    - "initial-setup"
     - "libvirt-daemon"
+  notify:
+    - reboot
 
 - name: Check if graphical environment is the default
   command: "systemctl get-default"
