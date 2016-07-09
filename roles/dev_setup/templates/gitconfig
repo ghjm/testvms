@@ -1,0 +1,3 @@
+[user]
+name = {{ dev_user_full_name }}
+email = {{ dev_user_email }}

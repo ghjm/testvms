@@ -2,6 +2,13 @@
 
 # RHEL/CentOS 7 Dev Box Setup
 
+- name: Install additional repos
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - epel-release
+
 - name: Install dev packages
   yum:
     name: "{{ item }}"
@@ -10,6 +17,11 @@
     - "@^GNOME Desktop"
     - "@Development Tools"
     - "openssh-askpass"
+    - "git"
+    - "python-virtualenv"
+    - "rpm-build"
+    - "mock"
+    - "npm"
 
 - name: Remove packages we don't want that came in through groups
   yum:
@@ -23,6 +35,12 @@
     - "libvirt-daemon"
   notify:
     - reboot
+
+- name: Add dev user to mock group
+  user:
+    name: "{{ dev_user }}"
+    groups: "mock"
+    append: yes
 
 - name: Check if graphical environment is the default
   command: "systemctl get-default"

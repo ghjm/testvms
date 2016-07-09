@@ -43,28 +43,34 @@
   when: vmx_file.stat.exists == False
   delegate_to: localhost
 
-- name: Boot the VM
-  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} start \\\"{{ vmx_filename }}\\\"\""
-  args:
-    chdir: "{{ vm_path }}"
-  register: result
-  until: result.rc == 0
-  delay: 10
-  retries: 3
-  delegate_to: localhost
-  changed_when: False
+- name: Boot the VM and wait for setup
+  include: startup_vm.yml
 
-- name: Wait for correct IP address to be available via VMware Tools
-  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} getGuestIPAddress \"{{ vmx_filename }}\""
-  args:
-    chdir: "{{ vm_path }}"
-  register: vm_ip_output
-  until: (vm_ip_output.rc == 0) and (vm_ip_output.stdout == ansible_ssh_host)
-  delay: 15
-  retries: 120
-  delegate_to: localhost
+- name: Check if CD-ROM devices present
+  command: 'grep "^sata" "{{ vm_path }}/{{ vmx_filename }}"'
+  register: vmx_sata_devs
+  always_run: True
+  ignore_errors: True
   changed_when: False
+  delegate_to: localhost
 
-- name: Gather facts
+- name: Shut down the VM
+  include: shutdown_vm.yml
+  when: vmx_sata_devs.rc == 0
+
+- name: Remove CD/DVD devices
+  lineinfile:
+    dest: "{{ vm_path }}/{{ vmx_filename }}"
+    regexp: "^sata0"
+    state: absent
+  notify:
+    - reset
+  delegate_to: localhost
+  when: vmx_sata_devs.rc == 0
+
+- name: Boot the VM again
+  include: startup_vm.yml
+  when: vmx_sata_devs.rc == 0
+
+- name: Gather facts 
   setup:
-

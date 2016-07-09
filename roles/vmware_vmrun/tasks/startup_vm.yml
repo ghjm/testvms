@@ -1,0 +1,19 @@
+---
+- name: Shut down the VM
+  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} start \\\"{{ vmx_filename }}\\\"\""
+  args:
+    chdir: "{{ vm_path }}"
+  delegate_to: localhost
+  changed_when: False
+
+- name: Wait for correct IP address to be available via VMware Tools
+  command: "\"{{ vmware_library_path }}/vmrun\" -T {{ vmware_platform }} getGuestIPAddress \"{{ vmx_filename }}\""
+  args:
+    chdir: "{{ vm_path }}"
+  register: vm_ip_output
+  until: (vm_ip_output.rc == 0) and (vm_ip_output.stdout == ansible_ssh_host)
+  delay: 15
+  retries: 120
+  delegate_to: localhost
+  changed_when: False
+

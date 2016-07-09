@@ -1,0 +1,20 @@
+---
+- name: reboot
+  shell: "nohup sh -c 'sleep 5 && /sbin/reboot' > /dev/null &"
+  async: 0
+  poll: 0
+  ignore_errors: True
+  when: ansible_os_family != "Windows"
+  notify: "wait for ssh"
+
+- name: wait for ssh
+  wait_for:
+    delay: 30
+    host: "{{ ansible_ssh_host }}"
+    port: 22
+  delegate_to: localhost
+
+- name: reboot
+  win_reboot:
+  when: ansible_os_family == "Windows"
+

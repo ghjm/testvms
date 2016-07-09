@@ -49,11 +49,30 @@
     regexp: "^{{ dev_user }}"
     line: "{{ dev_user }} ALL=(ALL) NOPASSWD: ALL"
 
-# To Do:
-# git global username/email
-# git-prompt
-# vimrc
-# Remove mounted ISOs
-# More packages (python-virtualenv, etc)
+- name: 'Configure dot files for dev user'
+  template:
+    src: "{{ item }}"
+    dest: "/home/{{ dev_user }}/.{{ item }}"
+    mode: 0640
+    force: no
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    setype: "user_home_t"
+  with_items:
+    - "gitconfig"
+    - "vimrc"
 
+- name: 'Clone bash-git-prompt'
+  git:
+    repo: "https://github.com/magicmonty/bash-git-prompt.git"
+    dest: "/home/{{ dev_user }}/.bash-git-prompt"
+    depth: 1
+    update: no
 
+- name: 'Install bash-git-prompt in path'
+  lineinfile:
+    dest: "/home/{{ dev_user }}/.bashrc"
+    line: "{{ item }}"
+  with_items:
+    - "source ~/.bash-git-prompt/gitprompt.sh"
+    - "export GIT_PROMPT_ONLY_IN_REPO=1"

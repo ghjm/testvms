@@ -11,6 +11,7 @@
     - "ubuntu-desktop"
     - "xserver-xorg-input-all"
     - "open-vm-tools-desktop"
+    - "git"
 
 - name: Check locale
   command: "localectl"
