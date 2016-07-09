@@ -1,6 +1,7 @@
 ---
 - name: Copy startup script
   template:
-    src: "startup.sh"
-    dest: "/root"
+    src: "{{ startup_script_src }}"
+    dest: "{{ startup_script_dest }}"
     mode: 0755
+  when: startup_script_src is defined and startup_script_dest is defined

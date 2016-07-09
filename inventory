@@ -1,4 +1,4 @@
-[test_vms]
+[test_vms_linux]
 test-centos6 ipv4_addr_host_part=21 os=CentOS-6
 test-centos7 ipv4_addr_host_part=22 os=CentOS-7
 test-rhel6 ipv4_addr_host_part=23 os=RedHat-6
@@ -8,7 +8,23 @@ test-ol7 ipv4_addr_host_part=26 os=OL-7
 test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
 test-ubuntu14 ipv4_addr_host_part=28 os=Ubuntu-14
 test-ubuntu16 ipv4_addr_host_part=29 os=Ubuntu-16
-test-win2012 ipv4_addr_host_part=30 os=Windows-2012-R2 ansible_connection=winrm ansible_port=5986 ansible_ssh_user=Administrator ansible_ssh_pass=Password1$
+
+[test_vms_linux:vars]
+startup_script_src=startup.sh
+startup_script_dest=/root/startup.sh
+
+[test_vms_windows]
+test-win2012 ipv4_addr_host_part=30 os=Windows-2012-R2
+
+[test_vms_windows:vars]
+ansible_connection=winrm
+ansible_port=5986
+ansible_ssh_user=Administrator
+ansible_ssh_pass=Password1$
+
+[test_vms:children]
+test_vms_linux
+test_vms_windows
 
 [dev_vms]
 dev-centos7 ipv4_addr_host_part=10 os=CentOS-7
