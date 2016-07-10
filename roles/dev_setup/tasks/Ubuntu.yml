@@ -2,17 +2,34 @@
 
 # Ubuntu Dev Box Setup
 
-- name: Install dev packages
+- name: Install graphical desktop
   apt:
     name: "{{ item }}"
     state: present
+    install_recommends: no
   with_items:
     - "ubuntu-standard"
     - "ubuntu-desktop"
-    - "xserver-xorg-input-all"
     - "open-vm-tools-desktop"
-    - "git"
-
+    - "xserver-xorg-input-all"
+    - "xserver-xorg-video-vmware"
+    - "indicator-session"
+    - "unity-lens-applications"
+    - "acpi-support"
+    - "branding-ubuntu"
+    - "firefox"
+    - "fonts-liberation"
+    - "gnome-accessibility-themes"
+    - "gnome-terminal"
+    - "mousetweaks"
+    - "nautilus-share"
+    - "network-manager-gnome"
+    - "plymouth-theme-ubuntu-logo"
+    - "xdg-utils"
+    - "xterm"
+  notify:
+    - reboot
+    
 - name: Check locale
   command: "localectl"
   register: localectl_result
@@ -24,3 +41,18 @@
   notify:
     - reboot
 
+- name: Install dev tools
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "gcc"
+    - "make"
+    - "git"
+    - "nodejs-legacy"
+    - "npm"
+    - "python-setuptools"
+    - "python-virtualenv"
+    - "pbuilder"
+    - "debhelper"
+    - "reprepro"
