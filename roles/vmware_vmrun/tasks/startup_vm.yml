@@ -1,5 +1,5 @@
 ---
-- name: Shut down the VM
+- name: Start up the VM
   command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} start \\\"{{ vmx_filename }}\\\"\""
   args:
     chdir: "{{ vm_path }}"
