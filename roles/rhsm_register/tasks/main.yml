@@ -13,7 +13,7 @@
       redhat_subscription:
         state: present
         username: "{{ rhsm_username }}"
-        password: "{{ rhsm_password }}"
+        password: "{{ rhsm_password | b64decode }}"
         autosubscribe: True
         consumer_id: "{{ rhsm_identities[inventory_hostname] | default(omit) }}"
       no_log: True
