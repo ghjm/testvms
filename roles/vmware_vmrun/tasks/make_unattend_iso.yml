@@ -35,7 +35,7 @@
     path: "{{ vm_path }}/{{ item }}"
     state: absent
   with_flattened:
-    - "{{ tmp_scripts.results|map(attribute='item')|shuffle }}"
-    - "{{ tmp_extras.results|map(attribute='item')|shuffle }}"
+    - "{{ tmp_scripts.results|map(attribute='item')|list }}"
+    - "{{ tmp_extras.results|map(attribute='item')|list }}"
   delegate_to: localhost
 
