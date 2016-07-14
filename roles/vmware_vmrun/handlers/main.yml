@@ -1,0 +1,7 @@
+---
+- name: reset
+  command: "\"{{ role_path }}/bin/serialize.sh\" \"\\\"{{ vmware_library_path }}/vmrun\\\" -T {{ vmware_platform }} reset \\\"{{ vmx_filename }}\\\"\""
+  args:
+    chdir: "{{ vm_path }}"
+  delegate_to: localhost
+  changed_when: False
