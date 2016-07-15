@@ -5,9 +5,6 @@
   serial: "{{ serial|default(omit) }}"
   strategy: free
 
-  pre_tasks:
-    - include_vars: local_vars.yml
-
   roles:
     - role: os_specific_vars
 

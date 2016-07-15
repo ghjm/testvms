@@ -2,8 +2,6 @@
 ---
 - hosts: all_vms
   gather_facts: false
-  pre_tasks:
-    - include_vars: local_vars.yml
   roles:
     - role: vmware_vmrun
       action: snapshot_vm
