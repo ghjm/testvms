@@ -15,13 +15,18 @@
 
     - role: basic_packages
 
-- hosts: test_vms
-  roles:
     - role: startup_script
-  strategy: free
+      when: "'test_vms' in group_names"
 
-- hosts: dev_vms
-  roles:
     - role: dev_setup
-  strategy: free
+      when: "'dev_vms' in group_names"
+
+    - role: vmware_vmrun
+      action: snapshot_vm
+      ignore_errors: yes
+      when: "bssd|default(False)"
+
+    - role: vmware_vmrun
+      action: shutdown_vm
+      when: "bssd|default(False)"
 

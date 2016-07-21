@@ -1,5 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-- include: site.yml
-- include: snapshot_vms.yml
-- include: shutdown_vms.yml
