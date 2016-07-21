@@ -14,7 +14,9 @@ startup_script_src=startup.sh
 startup_script_dest=/root/startup.sh
 
 [test_vms_windows]
-test-win2012 ipv4_addr_host_part=30 os=Windows-2012-R2
+test-win2008 ipv4_addr_host_part=30 os=Windows-2008-R2
+test-win2012 ipv4_addr_host_part=31 os=Windows-2012-R2
+test-win2016 ipv4_addr_host_part=32 os=Windows-2016
 
 [test_vms_windows:vars]
 ansible_connection=winrm
@@ -30,7 +32,6 @@ test_vms_windows
 [dev_vms]
 dev-centos7 ipv4_addr_host_part=10 os=CentOS-7
 dev-ubuntu14 ipv4_addr_host_part=11 os=Ubuntu-14
-dev-ubuntu16 ipv4_addr_host_part=12 os=Ubuntu-16
 
 [all_vms:children]
 test_vms
