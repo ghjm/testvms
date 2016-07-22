@@ -4,6 +4,7 @@ vmx_template: "linux.vmx"
 iso_filename: 'CentOS-6.8-x86_64-minimal.iso'
 unattend_method: "el-ks"
 kickstart_ks_filename: "ks6.cfg"
+network_dev: "vmxnet3"
 boot_params: 'ks=cdrom:/ks.cfg'
 ansible_ssh_user: root
 extra_rpms:

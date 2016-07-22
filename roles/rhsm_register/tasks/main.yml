@@ -7,7 +7,7 @@
 
   rescue:
 
-    - include_vars: rhsm_credentials.yml
+    - include_vars: credentials.yml
 
     - name: Register RHEL System
       redhat_subscription:

@@ -4,6 +4,7 @@ vmx_template: "linux.vmx"
 iso_filename: 'rhel-server-7.2-x86_64-dvd.iso'
 unattend_method: "el-ks"
 kickstart_ks_filename: "ks7.cfg"
+network_dev: "vmxnet3"
 boot_params: 'inst.ks=cdrom:/ks.cfg inst.stage2=hd:LABEL=RHEL-7.2\x20Server.x86_64'
 ansible_ssh_user: root
 extra_rpms:

@@ -4,14 +4,17 @@
     state: directory
   delegate_to: localhost
 
+- name: Copy unattend file to tmp folder
+  template:
+    src: "{{ unattend_filename }}"
+    dest: "{{ vm_path }}/autounattend.xml"
+  delegate_to: localhost
+
 - name: Copy scripts to tmp folder
   template:
     src: "{{ item }}"
     dest: "{{ vm_path }}/{{ item }}"
-  with_items:
-    - autounattend.xml
-    - SetIPAddress.bat
-    - ConfigureRemotingForAnsible.ps1
+  with_items: "{{ script_files }}"
   register: tmp_scripts
   delegate_to: localhost
 
@@ -19,13 +22,12 @@
   copy:
     src: "{{ downloads_path }}/extra_windows/{{ item }}"
     dest: "{{ vm_path }}/{{ item }}"
-  with_items:
-    - vmware-tools-setup64.exe
+  with_items: "{{ extra_files }}"
   register: tmp_extras
   delegate_to: localhost
 
 - name: Create autounattend ISO
-  command: "\"{{ vmware_library_path }}/mkisofs\" -o \"{{ kickstart_iso_filename }}\" -R -J -V -T {{ tmp_scripts.results|map(attribute='item')|join(' ') }} {{ tmp_extras.results|map(attribute='item')|join(' ') }}"
+  command: "\"{{ vmware_library_path }}/mkisofs\" -o \"{{ kickstart_iso_filename }}\" -R -J -V -T autounattend.xml {{ tmp_scripts.results|map(attribute='item')|join(' ') }} {{ tmp_extras.results|map(attribute='item')|join(' ') }}"
   args:
     chdir: "{{ vm_path }}"
   delegate_to: localhost
@@ -35,6 +37,7 @@
     path: "{{ vm_path }}/{{ item }}"
     state: absent
   with_flattened:
+    - "autounattend.xml"
     - "{{ tmp_scripts.results|map(attribute='item')|list }}"
     - "{{ tmp_extras.results|map(attribute='item')|list }}"
   delegate_to: localhost

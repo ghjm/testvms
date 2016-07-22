@@ -4,3 +4,6 @@ vmx_template: ""
 iso_filename: ""
 boot_iso_label: ""
 boot_params: ""
+network_device_name: ""
+extra_files: []
+script_files: []

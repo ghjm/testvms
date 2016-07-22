@@ -1,9 +1,9 @@
 ---
-vmware_guest_os: 'windows8srv-64'
+vmware_guest_os: 'windows9srv-64'
 vmx_template: "windows.vmx"
-iso_filename: '9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.iso'
+iso_filename: '14300.1000.160324-1723.RS1_RELEASE_SVC_SERVER_OEMRET_X64FRE_EN-US.ISO'
 unattend_method: "windows"
-unattend_filename: "unattend-2012.xml"
+unattend_filename: "unattend-2016.xml"
 network_dev: "e1000e"
 network_device_name: "Ethernet0"
 scsi_dev: "lsisas1068"

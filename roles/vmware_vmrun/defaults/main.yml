@@ -9,8 +9,11 @@ vmware_library_path: "/Applications/VMware Fusion.app/Contents/Library"
 vmware_tools_path: "{{ vmware_library_path }}/isoimages"
 kickstart_ks_filename: "ks.cfg"
 kickstart_iso_filename: "kickstart.iso"
+unattend_filename: "autounattend.xml"
 boot_params: ""
 extra_rpms: []
+extra_files: []
+windows_admin_password: ""
 
 # Defaults for VMs
 guestos: centos-64
@@ -22,4 +25,5 @@ vm_path: "{{ vms_path }}/{{ vm_name }}"
 vmx_filename: "{{ vm_name }}.vmx"
 vmdk_filename: "{{ vm_name }}.vmdk"
 snapshot_name: "Snapshot"
-
+scsi_dev: lsilogic
+network_dev: e1000

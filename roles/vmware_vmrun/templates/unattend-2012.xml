@@ -77,7 +77,7 @@
         </component>
        	<component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <RunSynchronous>
-                <RunSynchronousCommand wcm:action="add">
+                <!-- <RunSynchronousCommand wcm:action="add">
                     <Description>IP Address Configuration</Description>
                     <Order>1</Order>
                     <Path>cmd /c E:\SetIPAddress.bat</Path>
@@ -92,9 +92,9 @@
                 <RunSynchronousCommand wcm:action="add">
                     <Description>VMWare Tools</Description>
                     <Order>3</Order>
-                    <Path>E:\vmware-tools-setup64.exe /s /v &quot;/qn REBOOT=ReallySuppress&quot; /l C:\Windows\Temp\vmware_tools_install.log</Path>
+		    <Path>cmd /c start /wait E:\vmware-tools-setup64.exe /s /v &quot;/qn REBOOT=ReallySuppress&quot; /l C:\Windows\Temp\vmware_tools_install.log</Path>
                     <WillReboot>Always</WillReboot>
-                </RunSynchronousCommand>
+                </RunSynchronousCommand> -->
             </RunSynchronous>
         </component>
     </settings>
@@ -107,16 +107,16 @@
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <AutoLogon>
                 <Password>
-		    <Value>Password1$</Value>
+		    <Value>{{ windows_unattend_password | b64decode }}</Value>
                     <PlainText>true</PlainText>
                 </Password>
-                <Enabled>false</Enabled>
-                <LogonCount>2</LogonCount>
+                <Enabled>true</Enabled>
+                <LogonCount>1</LogonCount>
                 <Username>Administrator</Username>
             </AutoLogon>
             <UserAccounts>
                 <AdministratorPassword>
-		    <Value>Password1$</Value>
+		    <Value>{{ windows_unattend_password | b64decode }}</Value>
                     <PlainText>true</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
@@ -125,6 +125,13 @@
             <OOBE>
                 <ProtectYourPC>1</ProtectYourPC>
             </OOBE>
+            <FirstLogonCommands>
+               <SynchronousCommand wcm:action="add">
+                  <Description>First Login Script</Description>
+                  <CommandLine>E:\RunOnce.cmd</CommandLine>
+                  <Order>1</Order>
+               </SynchronousCommand>
+            </FirstLogonCommands>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="wim:c:/users/graham/desktop/install.wim#Windows Server 2012 R2 SERVERSTANDARD" xmlns:cpi="urn:schemas-microsoft-com:cpi" />

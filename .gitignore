@@ -6,6 +6,6 @@ downloads
 downloads/
 tmp/
 group_vars/all
-rhsm_credentials.yml
+credentials.yml
 site.retry
 ansible.cfg

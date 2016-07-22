@@ -1,0 +1,18 @@
+---
+vmware_guest_os: 'windows7srv-64'
+vmx_template: "windows.vmx"
+iso_filename: '7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso'
+unattend_method: "windows"
+unattend_filename: "unattend-2008.xml"
+network_dev: "e1000e"
+network_device_name: "Local Area Connection"
+scsi_dev: "lsisas1068"
+ansible_ssh_user: Administrator
+script_files:
+  - SetIPAddress.bat
+  - ConfigureRemotingForAnsible.ps1
+  - RunOnce.cmd
+extra_files:
+  - vmware-tools-setup64.exe
+  - NDP452-KB2901907-x86-x64-AllOS-ENU.exe
+  - Windows6.1-KB2506143-x64.msu

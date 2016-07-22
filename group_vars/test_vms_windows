@@ -1,0 +1,5 @@
+ansible_connection: winrm
+ansible_port: 5986
+ansible_ssh_user: Administrator
+ansible_ssh_pass: "{{ windows_admin_password | b64decode }}"
+ansible_winrm_server_cert_validation: ignore

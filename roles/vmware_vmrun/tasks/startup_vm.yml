@@ -17,3 +17,8 @@
   delegate_to: localhost
   changed_when: False
 
+- name: Wait a little longer because maybe services are still starting up
+  command: "sleep 10"
+  delegate_to: localhost
+  changed_when: False
+
