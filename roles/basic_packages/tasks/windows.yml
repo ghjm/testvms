@@ -1,4 +1,14 @@
 ---
+- name: Install packages from Chocolatey
+  win_chocolatey:
+    name: "{{ item }}"
+    state: present
+    upgrade: True
+  with_items:
+    - "chocolatey"
+    - "putty.install"
+    - "googlechrome"
+
 - name: Configure Windows Updates to check only
   win_regedit:
     key: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update'

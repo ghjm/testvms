@@ -9,8 +9,10 @@ network_device_name: "Ethernet0"
 scsi_dev: "lsisas1068"
 ansible_ssh_user: Administrator
 script_files:
-    - SetIPAddress.bat
-    - ConfigureRemotingForAnsible.ps1
-    - RunOnce.cmd
+  - SetIPAddress.bat
+  - ConfigureRemotingForAnsible.ps1
+  - RunOnce.cmd
 extra_files:
-    - vmware-tools-setup64.exe
+  - vmware-tools-setup64.exe
+  - 7z1602-x64.exe
+  - chocolatey.0.9.10.3.nupkg
