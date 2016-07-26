@@ -4,3 +4,4 @@ repos:
 
 packages:
   - dialog
+  - aptitude

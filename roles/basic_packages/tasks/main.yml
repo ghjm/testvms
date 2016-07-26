@@ -28,6 +28,12 @@
   with_items: "{{ packages }}"
   when: ansible_os_family == 'RedHat'
 
+- name: Update all installed packages
+  yum:
+    name: '*'
+    state: latest
+  when: ansible_os_family == 'RedHat'
+
 # Apt-based package installation
 
 - block:
@@ -55,4 +61,17 @@
     state: installed
   with_items: "{{ packages }}"
   when: ansible_os_family == 'Debian'
+
+- name: Update all installed packages
+  apt:
+    update_cache: yes
+    upgrade: safe
+  when: ansible_os_family == 'Debian'
+
+# Windows package installation
+
+- name: Apply all available Windows updates
+  win_updates:
+    state: installed
+  when: ansible_os_family == 'Windows'
 
