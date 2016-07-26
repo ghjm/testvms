@@ -16,7 +16,8 @@ cd chocolatey
 "C:\Program Files\7-Zip\7z" x E:\chocolatey.0.9.10.3.nupkg
 powershell tools\chocolateyInstall.ps1
 cd ..
-del /s /q chocolatey
+rmdir /s /q chocolatey
+C:\ProgramData\chocolatey\bin\choco install chocolatey
 
 rem Install VMware Tools
 
