@@ -60,7 +60,7 @@
 - name: Check if CD-ROM devices present
   command: 'grep "^ide1" "{{ vm_path }}/{{ vmx_filename }}"'
   register: vmx_cdrom_devs
-  always_run: True
+  check_mode: False
   ignore_errors: True
   changed_when: False
   delegate_to: localhost

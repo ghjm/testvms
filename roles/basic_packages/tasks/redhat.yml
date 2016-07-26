@@ -1,0 +1,19 @@
+---
+- name: Install additional yum repositories
+  yum_repository:
+    name: '{{ item.name }}'
+    baseurl: '{{ item.baseurl|default(omit) }}'
+    mirrorlist: '{{ item.mirrorlist|default(omit) }}'
+  with_items: '{{ repos }}'
+
+- name: Install packages via yum
+  yum:
+    name: '{{ item }}'
+    state: installed
+  with_items: "{{ packages }}"
+
+- name: Update all installed packages
+  yum:
+    name: '*'
+    state: latest
+

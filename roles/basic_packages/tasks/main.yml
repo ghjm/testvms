@@ -13,65 +13,16 @@
 
 # RPM-based package installation
 
-- name: Install additional yum repositories
-  yum_repository:
-    name: '{{ item.name }}'
-    baseurl: '{{ item.baseurl|default(omit) }}'
-    mirrorlist: '{{ item.mirrorlist|default(omit) }}'
-  with_items: '{{ repos }}'
-  when: ansible_os_family == 'RedHat'
-
-- name: Install packages via yum
-  yum:
-    name: '{{ item }}'
-    state: installed
-  with_items: "{{ packages }}"
-  when: ansible_os_family == 'RedHat'
-
-- name: Update all installed packages
-  yum:
-    name: '*'
-    state: latest
+- include: redhat.yml
   when: ansible_os_family == 'RedHat'
 
 # Apt-based package installation
 
-- block:
-    - name: Update apt cache
-      apt:
-        update_cache: True
-  rescue:
-    - name: Clear stale cache
-      file:
-        path: /var/lib/apt/lists
-        state: absent
-    - name: Update apt cache via command
-      command: "apt-get update"
-  when: ansible_os_family == 'Debian'
-
-- name: Install additional apt repositories
-  apt_repository:
-    repo: "{{ item.repo }}"
-  with_items: "{{ repos }}"
-  when: ansible_os_family == 'Debian'
-
-- name: Install packages via apt-get
-  apt:
-    name: '{{ item }}'
-    state: installed
-  with_items: "{{ packages }}"
-  when: ansible_os_family == 'Debian'
-
-- name: Update all installed packages
-  apt:
-    update_cache: yes
-    upgrade: safe
+- include: debian.yml
   when: ansible_os_family == 'Debian'
 
 # Windows package installation
 
-- name: Apply all available Windows updates
-  win_updates:
-    state: installed
+- include: windows.yml
   when: ansible_os_family == 'Windows'
 

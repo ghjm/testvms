@@ -89,6 +89,12 @@
 		    <Path>cmd /c start /wait wusa E:\Windows6.1-KB2506143-x64.msu /quiet /norestart</Path>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
+                <RunSynchronousCommand wcm:action="add">
+                    <Description>Install updated Windows Update</Description>
+                    <Order>3</Order>
+		    <Path>cmd /c start /wait E:\WindowsUpdateAgent-7.6-x64.exe /quiet /norestart</Path>
+                    <WillReboot>Always</WillReboot>
+                </RunSynchronousCommand>
             </RunSynchronous>
         </component>
     </settings>

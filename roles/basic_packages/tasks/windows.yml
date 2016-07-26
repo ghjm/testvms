@@ -1,0 +1,15 @@
+---
+- name: Configure Windows Updates to check only
+  win_regedit:
+    key: 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update'
+    value: "{{ item }}"
+    data: 2
+    datatype: dword
+  with_items:
+    - "AUOptions"
+    - "CachedAUOptions"
+
+- name: Apply all available Windows updates
+  win_updates:
+    state: installed
+
