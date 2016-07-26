@@ -16,7 +16,7 @@ startup_script_dest=/root/startup.sh
 [test_vms_windows]
 test-win2008 ipv4_addr_host_part=30 os=Windows-2008-R2
 test-win2012 ipv4_addr_host_part=31 os=Windows-2012-R2
-test-win2016 ipv4_addr_host_part=32 os=Windows-2016
+#test-win2016 ipv4_addr_host_part=32 os=Windows-2016
 
 [test_vms_windows:vars]
 ansible_connection=winrm
