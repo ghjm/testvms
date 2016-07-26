@@ -24,6 +24,7 @@ ansible_port=5986
 ansible_ssh_user=Administrator
 ansible_ssh_pass=Password1$
 ansible_winrm_server_cert_validation=ignore
+disk_size=40GB
 
 [test_vms:children]
 test_vms_linux
