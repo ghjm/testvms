@@ -6,7 +6,7 @@ powershell Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 powershell E:\ConfigureRemotingForAnsible.ps1
 
 rem Install 7zip
-start /wait E:\7z1602-x64.exe /S /D=="C:\Program Files\7-Zip"
+start /wait E:\7z1602-x64.exe /S /D="C:\Program Files\7-Zip"
 
 rem Install Chocolatey
 c:
