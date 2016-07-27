@@ -56,3 +56,11 @@
     - "pbuilder"
     - "debhelper"
     - "reprepro"
+
+- name: Remove packages we don't want
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "xserver-xorg-input-vmmouse"
+
