@@ -11,10 +11,11 @@
   args:
     chdir: "{{ vm_path }}"
   register: vm_ip_output
-  until: (vm_ip_output.rc == 0) and (vm_ip_output.stdout == ansible_ssh_host)
+  until: ((vm_ip_output.rc|default(255)) == 0) and ((vm_ip_output.stdout|default('')) == ansible_ssh_host)
   delay: 15
   retries: 120
   delegate_to: localhost
+  failed_when: False
   changed_when: False
 
 - name: Wait a little longer because maybe services are still starting up
