@@ -25,9 +25,9 @@ while true; do
     rm $LOCKFILE
     exit $retval
   elif [ "$LOCK_METHOD" == "flock" ]; then
-    flock -n -E 127 $LOCKFILE sh -c "$1"
+    flock -n -E 251 $LOCKFILE sh -c "$1"
     retval=$?
-    if [ "$retval" != "127" ]; then
+    if [ "$retval" != "251" ]; then
       exit $retval
     fi      
   fi
