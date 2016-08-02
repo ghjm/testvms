@@ -73,6 +73,7 @@
   service:
     name: apache2
     state: running
+    enabled: True
 
 - name: Create deb www symlink
   file:
