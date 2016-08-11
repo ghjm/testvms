@@ -73,11 +73,3 @@
   service:
     name: apache2
     state: running
-
-- name: Create deb www symlink
-  file:
-    dest: "/var/www/html/deb"
-    src: "/home/{{ dev_user }}/git/ansible-tower/reprepro"
-    force: True
-
-

@@ -1,11 +1,5 @@
 ---
 
-- include: 'CentOS-7.yml'
-  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
-
-- include: 'Ubuntu.yml'
-  when: ansible_distribution == 'Ubuntu'
-
 - name: 'Create dev user'
   user:
     name: "{{ dev_user }}"
@@ -76,3 +70,9 @@
   with_items:
     - "source ~/.bash-git-prompt/gitprompt.sh"
     - "export GIT_PROMPT_ONLY_IN_REPO=1"
+
+- include: 'CentOS-7.yml'
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+
+- include: 'Ubuntu.yml'
+  when: ansible_distribution == 'Ubuntu'
