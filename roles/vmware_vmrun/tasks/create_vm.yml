@@ -53,6 +53,7 @@
   delegate_to: localhost
   changed_when: False
   failed_when: False
+  no_log: True
 
 - name: Gather facts 
   setup:

@@ -6,6 +6,7 @@
     password: "{{ dev_password }}"
     comment: "{{ dev_user_full_name }}"
     update_password: on_create
+  no_log: True
 
 - name: 'Create user ssh folder'
   file:

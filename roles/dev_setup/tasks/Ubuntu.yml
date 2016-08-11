@@ -73,3 +73,4 @@
   service:
     name: apache2
     state: running
+    enabled: True

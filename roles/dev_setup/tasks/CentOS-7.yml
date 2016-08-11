@@ -53,3 +53,11 @@
   notify:
     - reboot
 
+- name: Install mock scl config file
+  copy:
+    src: 'epel-6-scl-python27-x86_64.cfg'
+    dest: '/etc/mock/'
+    owner: root
+    group: root
+    mode: '0644'
+
