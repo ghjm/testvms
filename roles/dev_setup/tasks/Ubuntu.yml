@@ -41,16 +41,21 @@
   notify:
     - reboot
 
+- name: Add node.js repo
+  template:
+    src: 'nodejs_deb.j2'
+    dest: '/etc/apt/sources.list.d/nodesource.list'
+
 - name: Install dev tools
   apt:
     name: "{{ item }}"
     state: present
+    update_cache: True
   with_items:
     - "gcc"
     - "make"
     - "git"
-    - "nodejs-legacy"
-    - "npm"
+    - "nodejs"
     - "python-setuptools"
     - "python-virtualenv"
     - "pbuilder"
