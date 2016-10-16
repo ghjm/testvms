@@ -14,16 +14,16 @@
     - role: vmware_vmrun
       action: revert_vm
       ignore_errors: yes
-      when: "bssd|default(False)"
+      when: "resnap|default(False)"
 
     - role: vmware_vmrun
       action: unsnapshot_vm
       ignore_errors: yes
-      when: "bssd|default(False)"
+      when: "resnap|default(False)"
 
     - role: vmware_vmrun
       action: startup_vm
-      when: "bssd|default(False)"
+      when: "resnap|default(False)"
 
     - role: rhsm_register
 
@@ -37,14 +37,9 @@
 
     - role: vmware_vmrun
       action: restart_vm
-      when: "bssd|default(False)"
+      when: "resnap|default(False)"
 
     - role: vmware_vmrun
       action: snapshot_vm
       ignore_errors: yes
-      when: "bssd|default(False)"
-
-    - role: vmware_vmrun
-      action: shutdown_vm
-      when: "bssd|default(False)"
-
+      when: "resnap|default(False)"

@@ -13,10 +13,10 @@
 - name: Install dev packages
   yum:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items:
-    - "@^GNOME Desktop"
-    - "@Development Tools"
+    - "@^gnome-desktop-environment"
+    - "@development"
     - "openssh-askpass"
     - "git"
     - "python-virtualenv"
