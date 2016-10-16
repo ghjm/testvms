@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts ":nl:" opt; do
+while getopts ":rl:" opt; do
     case $opt in
         l)
             if [ -z "$LIMIT" ]; then
@@ -9,8 +9,8 @@ while getopts ":nl:" opt; do
                 LIMIT=$LIMIT,$OPTARG
             fi
             ;;
-        n)
-            RESNAP=0
+        r)
+            RESNAP=1
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -24,4 +24,3 @@ while getopts ":nl:" opt; do
 done
 
 LIMIT=${LIMIT:-'test-*'}
-RESNAP=${RESNAP:-1}
