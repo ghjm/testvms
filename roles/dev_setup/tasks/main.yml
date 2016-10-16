@@ -77,3 +77,19 @@
 
 - include: 'Ubuntu.yml'
   when: ansible_distribution == 'Ubuntu'
+ 
+- name: Add docker group
+  group:
+    name: docker
+    state: present
+    
+- name: Add dev user to docker group
+  user:
+    name: "{{ dev_user }}"
+    groups: "docker"
+    append: yes
+
+- name: Allow docker group to talk to docker daemon
+  file:
+    path: "/var/run/docker.sock"
+    group: "docker"

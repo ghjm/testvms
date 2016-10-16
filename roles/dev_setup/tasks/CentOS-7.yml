@@ -24,6 +24,7 @@
     - "mock"
     - "nodejs"
     - "nodejs-devel"
+    - "docker"
 
 - name: Remove packages we don't want that came in through groups
   yum:
@@ -63,3 +64,10 @@
     group: root
     mode: '0644'
 
+- name: Start needed services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - "docker"

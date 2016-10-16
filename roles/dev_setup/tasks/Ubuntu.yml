@@ -61,6 +61,7 @@
     - "pbuilder"
     - "debhelper"
     - "reprepro"
+    - "docker.io"
 
 - name: Remove packages we don't want
   apt:
@@ -74,8 +75,11 @@
     name: "apache2"
     state: installed
 
-- name: Start Apache
+- name: Start needed services
   service:
-    name: apache2
+    name: "{{ item }}"
     state: running
     enabled: True
+  with_items:
+    - "docker"
+    - "apache2"
