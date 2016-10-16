@@ -19,6 +19,7 @@
     - "@development"
     - "openssh-askpass"
     - "git"
+    - "python-pip"
     - "python-virtualenv"
     - "rpm-build"
     - "mock"

@@ -11,7 +11,7 @@
     - "ubuntu-standard"
     - "ubuntu-desktop"
     - "open-vm-tools-desktop"
-    - "xserver-xorg-input-all"
+    - "xserver-xorg-input-mouse"
     - "xserver-xorg-video-vmware"
     - "indicator-session"
     - "unity-lens-applications"
@@ -62,18 +62,7 @@
     - "debhelper"
     - "reprepro"
     - "docker.io"
-
-- name: Remove packages we don't want
-  apt:
-    name: "{{ item }}"
-    state: absent
-  with_items:
-    - "xserver-xorg-input-vmmouse"
-
-- name: Install Apache
-  apt:
-    name: "apache2"
-    state: installed
+    - "apache2"
 
 - name: Start needed services
   service:
