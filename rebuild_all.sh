@@ -23,5 +23,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
       IFS=,
       rm -rf $LIMIT
     )
-    $DIR/update_all.sh "$@"
+    $DIR/update_all.sh -r "$@"
 fi
