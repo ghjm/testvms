@@ -94,15 +94,26 @@
     path: "/var/run/docker.sock"
     group: "docker"
 
+- name: 'PyCharm folders'
+  file:
+    path: "/home/{{ dev_user }}/.PyCharm2016.2/config/{{ item }}"
+    mode: 0775
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    recurse: yes
+    state: directory
+  with_items:
+    - "keymaps"
+    - "options"
+
 - name: 'PyCharm settings'
   copy:
     src: "{{ item.src }}"
-    dest: "/home/{{ dev_user }}/.PyCharm2016.2/{{ item.dest }}"
-    mode: 0640
+    dest: "/home/{{ dev_user }}/.PyCharm2016.2/config/{{ item.dest }}"
+    mode: 0775
     force: no
     owner: "{{ dev_user }}"
     group: "{{ dev_user }}"
-    setype: "user_home_t"
   with_items:
     - src: "Graham.xml"
       dest: "keymaps/Graham.xml"
