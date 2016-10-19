@@ -93,3 +93,19 @@
   file:
     path: "/var/run/docker.sock"
     group: "docker"
+
+- name: 'PyCharm settings'
+  copy:
+    src: "{{ item.src }}"
+    dest: "/home/{{ dev_user }}/.PyCharm2016.2/{{ item.dest }}"
+    mode: 0640
+    force: no
+    owner: "{{ dev_user }}"
+    group: "{{ dev_user }}"
+    setype: "user_home_t"
+  with_items:
+    - src: "Graham.xml"
+      dest: "keymaps/Graham.xml"
+    - src: "keymap.xml"
+      dest: "options/keymap.xml"
+
