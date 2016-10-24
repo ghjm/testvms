@@ -2,6 +2,7 @@
 packages:
   - curl
   - wget
+  - createrepo
   - deltarpm
   - dialog
   - ntpdate
