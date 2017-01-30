@@ -6,6 +6,7 @@ downloads
 downloads/
 tmp/
 group_vars/all
+group_vars/test_vms_windows
 credentials.yml
 site.retry
 ansible.cfg
