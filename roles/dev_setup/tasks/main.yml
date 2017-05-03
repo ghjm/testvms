@@ -60,6 +60,9 @@
 - include: 'CentOS-7.yml'
   when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
 
+- include: 'Fedora.yml'
+  when: ansible_distribution == 'Fedora'
+
 - include: 'Ubuntu.yml'
   when: ansible_distribution == 'Ubuntu'
  

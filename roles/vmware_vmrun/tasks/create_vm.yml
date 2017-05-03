@@ -11,8 +11,8 @@
   register: kickstart_iso_file
   delegate_to: localhost
 
-- name: Create kickstart ISO file
-  include: make_kickstart_iso.yml
+- name: Create kickstart ISO file (EL)
+  include: make_kickstart_iso_el.yml
   when: not kickstart_iso_file.stat.exists and unattend_method == "el-ks"
 
 - name: Create preseed ISO file

@@ -45,7 +45,7 @@
   delegate_to: localhost
 
 - name: Create Kickstart ISO
-  command: "\"{{ vmware_library_path }}/mkisofs\" -o \"{{ kickstart_iso_filename }}\" -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -V -T isolinux"
+  command: "\"{{ vmware_library_path }}/mkisofs\" -o \"{{ kickstart_iso_filename }}\" -b isolinux.bin -c boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -T isolinux"
   args:
     chdir: "{{ vm_path }}"
   delegate_to: localhost

@@ -34,6 +34,7 @@ test_vms_windows
 [dev_vms]
 dev-centos7 ipv4_addr_host_part=10 os=CentOS-7
 dev-ubuntu14 ipv4_addr_host_part=11 os=Ubuntu-14
+dev-fedora ipv4_addr_host_part=12 os=Fedora-25
 
 [all_vms:children]
 test_vms
