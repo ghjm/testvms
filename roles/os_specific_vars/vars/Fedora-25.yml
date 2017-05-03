@@ -1,0 +1,10 @@
+---
+vmware_guest_os: 'fedora-64'
+vmx_template: "linux.vmx"
+iso_filename: 'Fedora-Server-dvd-x86_64-25-1.3.iso'
+unattend_method: "el-ks"
+kickstart_ks_filename: "ks-f25.cfg"
+network_dev: "vmxnet3"
+boot_params: "inst.ks=cdrom:/ks.cfg inst.stage2=hd:LABEL=Fedora-S-dvd-x86_64-25"
+ansible_ssh_user: root
+extra_rpms: []

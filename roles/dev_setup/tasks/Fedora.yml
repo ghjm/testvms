@@ -1,0 +1,63 @@
+---
+
+# Fedora 25 Dev Box Setup
+
+- name: Install dev packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "@Fedora Workstation"
+    - "openssh-askpass"
+    - "python-pip"
+    - "python-virtualenv"
+    - "git"
+    - "rpm-build"
+    - "mock"
+    - "docker"
+
+- name: Remove packages we don't want that came in through groups
+  dnf:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "PackageKit"
+    - "gnome-initial-setup"
+    - "initial-setup-gui"
+    - "initial-setup"
+    - "libvirt-daemon"
+  notify:
+    - reboot
+
+- name: Add dev user to mock group
+  user:
+    name: "{{ dev_user }}"
+    groups: "mock"
+    append: yes
+
+- name: Check if graphical environment is the default
+  command: "systemctl get-default"
+  register: systemctl_default
+  changed_when: False
+
+- name: Set graphical environment as default
+  command: "systemctl set-default graphical.target"
+  when: '"graphical.target" not in systemctl_default.stdout'
+  notify:
+    - reboot
+
+- name: Install mock scl config file
+  copy:
+    src: 'epel-6-scl-python27-x86_64.cfg'
+    dest: '/etc/mock/'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Start needed services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - "docker"
