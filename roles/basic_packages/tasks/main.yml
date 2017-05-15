@@ -19,7 +19,7 @@
 # DNF-based package installation
 
 - include: fedora.yml
-  when: ansible_distribution != 'Fedora'
+  when: ansible_distribution == 'Fedora'
 
 # Apt-based package installation
 
