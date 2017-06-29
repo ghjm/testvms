@@ -9,8 +9,8 @@ To get started with this, you will need several things. First, you need a collec
 ├── 14300.1000.160324-1723.RS1_RELEASE_SVC_SERVER_OEMRET_X64FRE_EN-US.ISO
 ├── 7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso
 ├── 9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.iso
-├── CentOS-6.8-x86_64-minimal.iso
-├── CentOS-7-x86_64-Minimal-1511.iso
+├── CentOS-6.9-x86_64-minimal.iso
+├── CentOS-7-x86_64-Minimal-1611.iso
 ├── Oracle-Linux-6.8-x86_64.iso
 ├── Oracle-Linux-7.2-x86_64.iso
 ├── extra_rpms

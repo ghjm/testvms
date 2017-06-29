@@ -1,7 +1,7 @@
 ---
 vmware_guest_os: 'centos-64'
 vmx_template: "linux.vmx"
-iso_filename: 'CentOS-6.8-x86_64-minimal.iso'
+iso_filename: 'CentOS-6.9-x86_64-minimal.iso'
 unattend_method: "el-ks"
 kickstart_ks_filename: "ks6.cfg"
 network_dev: "vmxnet3"
