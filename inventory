@@ -1,11 +1,11 @@
 [test_vms_linux]
-test-centos6 ipv4_addr_host_part=21 os=CentOS-6
+#test-centos6 ipv4_addr_host_part=21 os=CentOS-6
 test-centos7 ipv4_addr_host_part=22 os=CentOS-7
-test-rhel6 ipv4_addr_host_part=23 os=RedHat-6
+#test-rhel6 ipv4_addr_host_part=23 os=RedHat-6
 test-rhel7 ipv4_addr_host_part=24 os=RedHat-7
-test-ol6 ipv4_addr_host_part=25 os=OL-6
+#test-ol6 ipv4_addr_host_part=25 os=OL-6
 test-ol7 ipv4_addr_host_part=26 os=OL-7
-test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
+#test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
 test-ubuntu14 ipv4_addr_host_part=28 os=Ubuntu-14
 test-ubuntu16 ipv4_addr_host_part=29 os=Ubuntu-16
 
@@ -14,8 +14,8 @@ startup_script_src=startup.sh
 startup_script_dest=/root/startup.sh
 
 [test_vms_windows]
-test-win2008 ipv4_addr_host_part=30 os=Windows-2008-R2
-test-win2012 ipv4_addr_host_part=31 os=Windows-2012-R2
+#test-win2008 ipv4_addr_host_part=30 os=Windows-2008-R2
+#test-win2012 ipv4_addr_host_part=31 os=Windows-2012-R2
 #test-win2016 ipv4_addr_host_part=32 os=Windows-2016
 
 [test_vms_windows:vars]
