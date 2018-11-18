@@ -37,12 +37,6 @@
     state: directory
   delegate_to: localhost
     
-- name: Extract initrd to temp folder
-  shell: "gzip -d < ../initrd.gz | cpio -id"
-  args:
-    chdir: "{{ vm_path }}/isolinux/install/initrd-tmp"
-  delegate_to: localhost
-
 - name: Template preseed file to initrd temp folder
   template:
     src: preseed.cfg
@@ -50,7 +44,7 @@
   delegate_to: localhost
 
 - name: Rebuild initrd
-  shell: "find . | cpio --create --format='newc' | gzip > ../initrd.gz"
+  shell: "echo preseed.cfg | cpio -o -H newc | gzip >> ../initrd.gz"
   args:
     chdir: "{{ vm_path }}/isolinux/install/initrd-tmp"
   delegate_to: localhost
