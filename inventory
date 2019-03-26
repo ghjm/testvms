@@ -6,7 +6,7 @@ test-rhel7 ipv4_addr_host_part=24 os=RedHat-7
 #test-ol6 ipv4_addr_host_part=25 os=OL-6
 test-ol7 ipv4_addr_host_part=26 os=OL-7
 #test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
-test-ubuntu14 ipv4_addr_host_part=28 os=Ubuntu-14
+#test-ubuntu14 ipv4_addr_host_part=28 os=Ubuntu-14
 test-ubuntu16 ipv4_addr_host_part=29 os=Ubuntu-16
 
 [test_vms_linux:vars]
