@@ -10,3 +10,4 @@ group_vars/test_vms_windows
 credentials.yml
 site.retry
 ansible.cfg
+.vault_password

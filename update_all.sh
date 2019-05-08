@@ -3,4 +3,9 @@
 DIR=$(dirname "$0")
 . $DIR/get_cmdline.sh
 
-$DIR/site.yml -l "$LIMIT" --ask-vault-pass -e serial=4 ${RESNAP:+"-e resnap=$RESNAP"}
+if [ -z "$ANSIBLE_VAULT_PASSWORD_FILE" ]; then
+  AVP="--ask-vault-pass"
+else
+  AVP=""
+fi
+$DIR/site.yml -l "$LIMIT" $AVP -e serial=4 ${RESNAP:+"-e resnap=$RESNAP"}

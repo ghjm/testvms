@@ -3,6 +3,7 @@
 test-centos7 ipv4_addr_host_part=22 os=CentOS-7
 #test-rhel6 ipv4_addr_host_part=23 os=RedHat-6
 test-rhel7 ipv4_addr_host_part=24 os=RedHat-7
+test-rhel8 ipv4_addr_host_part=30 os=RedHat-8
 #test-ol6 ipv4_addr_host_part=25 os=OL-6
 test-ol7 ipv4_addr_host_part=26 os=OL-7
 #test-ubuntu12 ipv4_addr_host_part=27 os=Ubuntu-12
@@ -12,6 +13,12 @@ test-ubuntu16 ipv4_addr_host_part=29 os=Ubuntu-16
 [test_vms_linux:vars]
 startup_script_src=startup.sh
 startup_script_dest=/root/startup.sh
+
+[el8_vms]
+test-rhel8
+
+[el8_vms:vars]
+ansible_python_interpreter=/usr/libexec/platform-python
 
 [test_vms_windows]
 #test-win2008 ipv4_addr_host_part=30 os=Windows-2008-R2
