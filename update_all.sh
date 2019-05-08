@@ -8,4 +8,4 @@ if [ -z "$ANSIBLE_VAULT_PASSWORD_FILE" ]; then
 else
   AVP=""
 fi
-$DIR/site.yml -l "$LIMIT" $AVP -e serial=4 ${RESNAP:+"-e resnap=$RESNAP"}
+$DIR/site.yml -l "$LIMIT" $AVP -e serial=6 ${RESNAP:+"-e resnap=$RESNAP"}
